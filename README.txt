@@ -1,5 +1,24 @@
-# 🍱 CrisisFood AI
+#  CrisisFood AI
 
+CrisisFood AI is a web-based AI chatbot built with FastAPI (Python) and Google Gemini.
+It runs on any device — mobile, tablet, or desktop  with a WhatsApp-style chat interface
+designed to be simple.
+
+CrisisFood AI provides immediate, practical, and safety-first guidance on the best available
+food and water options during real-life emergency and crisis situations. It is purpose-built
+for the Indian context — where people face unique challenges during disasters such as limited
+access to clean water, dependence on locallyavailable foods, and communication breakdowns
+during in the critical situations.
+
+
+Crisis Type	Guidance Provided
+Flood / Heavy Rain	Contamination risks, safe dry foods, water purification
+Blackout / Power Cut	Fridge safety timelines, no-cook food options
+Lockdown	Dry stock recommendations, shelf-stable Indian foods
+Earthquake / Disaster	Emergency kit foods, water safety, minimal cooking
+Heatwave	Hydration foods, electrolytes, items to avoid
+Disease Outbreak	Contamination prevention, safe preparation methods
+Storm / Cyclone	Pre-storm stocking, what to eat during and after
 
 
 ## Steps
