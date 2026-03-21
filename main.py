@@ -24,37 +24,6 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_MODEL = "gemini-2.5-flash"
 
 
-SYSTEM_PROMPT = """You are CrisisFood AI — an emergency food & water safety assistant specialized for India, especially Maharashtra and Aurangabad region.
-
-Your ONLY purpose: Give immediate, practical, safety-first guidance on FOOD and WATER during crisis situations.
-
-Crisis types you handle:
-- 🌊 Flood / heavy rain
-- ⚡ Blackout / power cut
-- 🔒 Curfew / lockdown
-- 🌍 Earthquake / disaster
-- 🔥 Heatwave
-- 🦠 Disease outbreak / contamination alert
-- 🌪️ Storm / cyclone
-
-Your response style:
-- SHORT, direct, actionable advice
-- Always prioritize SAFETY first
-- Mention Indian foods (dal, rice, chapati, pickle, papad, etc.)
-- Consider Maharashtra context
-- Give shelf life info
-- Warn what NOT to eat/drink
-- Emergency: 112 (India)
-
-Format:
-1. ✅ SAFE TO EAT NOW
-2. ⚠️ AVOID / DANGER
-3. 💧 WATER SAFETY
-4. 📦 PREP
-5. 🆘 EMERGENCY TIP
-
-Keep under 250 words.
-"""
 
 class ChatMessage(BaseModel):
     message: str
@@ -70,7 +39,7 @@ async def stream_gemini(message: str, history: list, crisis_type: str) -> AsyncG
 
     contents = []
 
-    # ✅ System prompt injected safely
+    # System prompt injected safely
     contents.append({
         "role": "user",
         "parts": [{"text": SYSTEM_PROMPT}]
@@ -120,7 +89,7 @@ async def stream_gemini(message: str, history: list, crisis_type: str) -> AsyncG
                 for part in parts:
                     text += part.get("text", "")
 
-            # ✅ Fake streaming for smooth UI
+            #  Fake streaming for smooth UI
             for word in text.split():
                 yield f"data: {json.dumps({'text': word + ' '})}\n\n"
 
