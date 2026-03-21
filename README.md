@@ -12,14 +12,7 @@ access to clean water, dependence on locallyavailable foods, and communication b
 during in the critical situations.
 
 
-Crisis Type	Guidance Provided
-Flood / Heavy Rain	Contamination risks, safe dry foods, water purification
-Blackout / Power Cut	Fridge safety timelines, no-cook food options
-Lockdown	Dry stock recommendations, shelf-stable Indian foods
-Earthquake / Disaster	Emergency kit foods, water safety, minimal cooking
-Heatwave	Hydration foods, electrolytes, items to avoid
-Disease Outbreak	Contamination prevention, safe preparation methods
-Storm / Cyclone	Pre-storm stocking, what to eat during and after
+
 
 
 ## Steps
