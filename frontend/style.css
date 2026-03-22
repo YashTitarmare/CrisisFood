@@ -1,0 +1,583 @@
+/* CrisisFood AI - Styles */
+
+/* ============================================
+   CSS Variables (Color Theme)
+   ============================================ */
+:root {
+  /* Base Colors */
+  --bg: #f5f7fa;
+  --white: #ffffff;
+  --border: #e2e8f0;
+  --shadow: 0 2px 12px rgba(0,0,0,0.07);
+
+  /* Semantic Colors */
+  --safe: #16a34a;
+  --safe-bg: #f0fdf4;
+
+  --danger: #dc2626;
+  --danger-bg: #fff1f2;
+
+  --water: #0284c7;
+  --water-bg: #f0f9ff;
+
+  --prep: #d97706;
+  --prep-bg: #fffbeb;
+
+  --emergency: #7c3aed;
+  --emergency-bg: #faf5ff;
+
+  /* Accent */
+  --accent: #f97316;
+  --accent2: #ea580c;
+
+  /* Text */
+  --text: #1e293b;
+  --muted: #64748b;
+  --light: #94a3b8;
+}
+
+/* ============================================
+   Reset & Base Styles
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+header {
+  background: var(--white);
+  border-bottom: 2px solid var(--border);
+  padding: 10px 18px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+  box-shadow: var(--shadow);
+}
+
+.hlogo {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 12px rgba(249,115,22,0.35);
+  flex-shrink: 0;
+}
+
+.htext h1 {
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.htext p {
+  font-size: 11px;
+  color: var(--muted);
+  font-family: 'Fira Code', monospace;
+}
+
+.hbadge {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--safe);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--safe);
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.loc {
+  font-size: 10.5px;
+  color: var(--light);
+  font-family: 'Fira Code', monospace;
+}
+
+/* ============================================
+   Crisis Bar
+   ============================================ */
+.crisis-bar {
+  background: var(--white);
+  border-bottom: 1px solid var(--border);
+  padding: 8px 14px;
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+
+.crisis-bar::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  flex-shrink: 0;
+  padding: 6px 13px;
+  border-radius: 22px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  user-select: none;
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: #fff7ed;
+}
+
+.chip.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  box-shadow: 0 3px 10px rgba(249,115,22,0.35);
+}
+
+/* ============================================
+   SOS Alert
+   ============================================ */
+.sos {
+  display: none;
+  background: #fff1f2;
+  border-bottom: 1px solid #fecaca;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--danger);
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.sos.show {
+  display: block;
+}
+
+/* ============================================
+   Chat Area
+   ============================================ */
+#chat {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+#chat::-webkit-scrollbar {
+  width: 4px;
+}
+
+#chat::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 2px;
+}
+
+/* ============================================
+   Welcome Card
+   ============================================ */
+.welcome {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 24px 18px 18px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+
+.wimg {
+  font-size: 56px;
+  margin-bottom: 10px;
+}
+
+.welcome h2 {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+
+.welcome p {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.qgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.qbtn {
+  padding: 9px 10px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+  line-height: 1.4;
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.15s;
+}
+
+.qbtn:hover {
+  border-color: var(--accent);
+  background: #fff7ed;
+  color: var(--accent2);
+}
+
+/* ============================================
+   Message Bubbles
+   ============================================ */
+.msg {
+  display: flex;
+  gap: 9px;
+  animation: slideUp 0.22s ease;
+}
+
+.msg.user {
+  flex-direction: row-reverse;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  align-self: flex-end;
+}
+
+.avatar.user {
+  background: #dbeafe;
+}
+
+.avatar.bot {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  box-shadow: 0 2px 8px rgba(249,115,22,0.3);
+}
+
+.bubble-wrap {
+  max-width: 82%;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.msg.user .bubble-wrap {
+  align-items: flex-end;
+}
+
+.bubble {
+  padding: 11px 15px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  border: 1.5px solid var(--border);
+  word-break: break-word;
+}
+
+.bubble.user {
+  background: #dbeafe;
+  border-color: #bfdbfe;
+  border-bottom-right-radius: 4px;
+  color: #1e3a5f;
+  font-weight: 700;
+}
+
+.bubble.bot {
+  background: var(--white);
+  border-bottom-left-radius: 4px;
+  box-shadow: var(--shadow);
+}
+
+.timestamp {
+  font-size: 10px;
+  color: var(--light);
+  font-family: 'Fira Code', monospace;
+}
+
+/* ============================================
+   Typing Indicator
+   ============================================ */
+.typing-dots {
+  display: flex;
+  gap: 5px;
+  padding: 4px 2px;
+}
+
+.typing-dots span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: bounce 1.2s infinite;
+}
+
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+  40% { transform: scale(1.1); opacity: 1; }
+}
+
+/* ============================================
+   AI Response Sections
+   ============================================ */
+.response-section {
+  margin: 7px 0 3px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13.5px;
+  line-height: 1.65;
+}
+
+.section-title {
+  font-size: 11.5px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.section.safe {
+  background: var(--safe-bg);
+  border-left: 3px solid var(--safe);
+}
+
+.section.safe .section-title {
+  color: var(--safe);
+}
+
+.section.avoid {
+  background: var(--danger-bg);
+  border-left: 3px solid var(--danger);
+}
+
+.section.avoid .section-title {
+  color: var(--danger);
+}
+
+.section.water {
+  background: var(--water-bg);
+  border-left: 3px solid var(--water);
+}
+
+.section.water .section-title {
+  color: var(--water);
+}
+
+.section.prep {
+  background: var(--prep-bg);
+  border-left: 3px solid var(--prep);
+}
+
+.section.prep .section-title {
+  color: var(--prep);
+}
+
+.section.emergency {
+  background: var(--emergency-bg);
+  border-left: 3px solid var(--emergency);
+}
+
+.section.emergency .section-title {
+  color: var(--emergency);
+}
+
+/* ============================================
+   Input Bar
+   ============================================ */
+.input-bar {
+  background: var(--white);
+  border-top: 1.5px solid var(--border);
+  padding: 10px 14px;
+  display: flex;
+  gap: 9px;
+  align-items: flex-end;
+  flex-shrink: 0;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.05);
+}
+
+.input-wrapper {
+  flex: 1;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 22px;
+  padding: 9px 16px;
+  display: flex;
+  align-items: flex-end;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input-wrapper:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(249,115,22,0.12);
+  background: var(--white);
+}
+
+#message-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: 'Nunito', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  resize: none;
+  max-height: 110px;
+  min-height: 22px;
+  line-height: 1.5;
+}
+
+#message-input::placeholder {
+  color: var(--light);
+  font-weight: 400;
+}
+
+#send-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.18s;
+  box-shadow: 0 4px 14px rgba(249,115,22,0.4);
+}
+
+#send-btn:hover {
+  transform: scale(1.07);
+}
+
+#send-btn:active {
+  transform: scale(0.94);
+}
+
+#send-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+#send-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: white;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+  text-align: center;
+  font-size: 10.5px;
+  color: var(--light);
+  padding: 4px 16px 7px;
+  background: var(--white);
+  font-family: 'Fira Code', monospace;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   Mobile Responsive
+   ============================================ */
+@media (max-width: 480px) {
+  header {
+    padding: 8px 12px;
+  }
+
+  .hlogo {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  .htext h1 {
+    font-size: 15px;
+  }
+
+  .htext p {
+    font-size: 10px;
+  }
+
+  .qgrid {
+    grid-template-columns: 1fr;
+  }
+
+  #chat {
+    padding: 12px 10px;
+  }
+
+  .bubble-wrap {
+    max-width: 88%;
+  }
+}

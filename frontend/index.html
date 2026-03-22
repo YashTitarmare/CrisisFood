@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrisisFood AI — Emergency Food Guide</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="hlogo">🍱</div>
+    <div class="htext">
+      <h1>CrisisFood AI</h1>
+      <p>Food &amp; Water Safety · Maharashtra, India</p>
+    </div>
+    <div class="hbadge">
+      <div class="pill"><span class="dot"></span>LIVE</div>
+      <span class="loc">📍 Aurangabad 🇮🇳</span>
+    </div>
+  </header>
+
+  <!-- CRISIS TYPE BAR -->
+  <div class="crisis-bar">
+    <div class="chip active" data-crisis="general" onclick="selectCrisis(this)">🌐 General</div>
+    <div class="chip" data-crisis="flood" onclick="selectCrisis(this)">🌊 Flood</div>
+    <div class="chip" data-crisis="blackout" onclick="selectCrisis(this)">⚡ Blackout</div>
+    <div class="chip" data-crisis="curfew" onclick="selectCrisis(this)">🔒 Curfew</div>
+    <div class="chip" data-crisis="earthquake" onclick="selectCrisis(this)">🌍 Earthquake</div>
+    <div class="chip" data-crisis="heatwave" onclick="selectCrisis(this)">🔥 Heatwave</div>
+    <div class="chip" data-crisis="outbreak" onclick="selectCrisis(this)">🦠 Outbreak</div>
+    <div class="chip" data-crisis="storm" onclick="selectCrisis(this)">🌪️ Storm</div>
+  </div>
+
+  <!-- SOS ALERT -->
+  <div class="sos" id="sos">
+    🆘 Real emergency? Call <strong>112</strong> immediately · NDRF: 011-24363260
+  </div>
+
+  <!-- CHAT AREA -->
+  <div id="chat">
+    <!-- Welcome Card -->
+    <div class="welcome" id="welcome-card">
+      <div class="wimg">🍱</div>
+      <h2>CrisisFood AI</h2>
+      <p>Emergency food &amp; water safety for Maharashtra, India.<br>Select your crisis type above, then ask me anything!</p>
+      <div class="qgrid">
+        <button class="qbtn" onclick="quickSend('Flood started. What food is safe to eat now?')">🌊 Flood food safety</button>
+        <button class="qbtn" onclick="quickSend('Power cut 8 hrs. Is my fridge food still safe?')">⚡ Fridge after blackout</button>
+        <button class="qbtn" onclick="quickSend('Curfew imposed. What dry food should I stock?')">🔒 Curfew stock list</button>
+        <button class="qbtn" onclick="quickSend('Earthquake — is tap water safe to drink?')">💧 Water safety check</button>
+        <button class="qbtn" onclick="quickSend('Only rice, dal, and candles. How to cook safely?')">🍚 Cook with no power</button>
+        <button class="qbtn" onclick="quickSend('What Indian foods last longest without a fridge?')">📦 No-fridge food list</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INPUT BAR -->
+  <div class="input-bar">
+    <div class="input-wrapper">
+      <textarea 
+        id="message-input" 
+        placeholder="Describe your situation… e.g. flood water entered, no power" 
+        rows="1"
+        onkeydown="handleKeyDown(event)"
+        oninput="autoResize(this)"
+      ></textarea>
+    </div>
+    <button id="send-btn" onclick="sendMessage()">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    ⚠️ Always call 112 in real emergencies · Not a substitute for official advice
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
