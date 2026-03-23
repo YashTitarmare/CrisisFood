@@ -4,6 +4,7 @@ FastAPI server with Google Gemini API integration
 """
 import os
 import json
+import asyncio
 import httpx
 from pathlib import Path
 from fastapi import FastAPI
@@ -100,11 +101,101 @@ class ChatMessage(BaseModel):
     crisis_type: str = "general"
 
 
+DEMO_RESPONSES = {
+    "flood": """1. ✅ SAFE TO EAT NOW
+    - Sealed packaged food (biscuits, chips, namkeen)
+    - Canned food if unopened
+    - Cooked rice/dal in clean containers
+    - Dry fruits, peanuts, roasted chana
+
+    2. ⚠️ AVOID / DANGER
+    - Food touched by flood water
+    - Open/loose food exposed to contamination
+    - Raw vegetables from flooded garden
+    - Milk packets if seal is broken
+
+    3. 💧 WATER SAFETY
+    - BOIL all water for 10+ minutes before drinking
+    - Use chlorine tablets (1 per liter)
+    - Avoid tap/municipal water until declared safe
+    - Use bottled water if available
+
+    4. 📦 PREP & STORAGE
+    - Store drinking water in clean containers
+    - Keep emergency ration for 3-5 days
+    - Rice, dal, biscuits = best survival food
+
+    5. 🆘 EMERGENCY TIP
+    - Call 112 for rescue · NDRF: 011-24363260""",
+
+    "blackout": """1. ✅ SAFE TO EAT NOW
+    - Frozen food (if freezer stays closed)
+    - Refrigerated food < 4 hours
+    - Canned/packaged food
+    - Dry fruits, biscuits, chapati with pickle
+
+    2. ⚠️ AVOID / DANGER
+    - Raw meat/fish left outside fridge > 2 hrs
+    - Milk products left unrefrigerated
+    - Cooked rice/dal > 4 hours without heat
+
+    3. 💧 WATER SAFETY
+    - Municipal supply usually fine
+    - Boil if using borewell/groundwater
+    - Store extra water for drinking
+
+    4. 📦 PREP & STORAGE
+    - Ice packs in cooler box
+    - Freeze water bottles for later use
+    - Keep torch + batteries ready
+
+    5. 🆘 EMERGENCY TIP
+    - Don't open fridge/freezer unnecessarily
+    - Food stays safe 4 hrs in closed fridge""",
+
+    "general": """1. ✅ SAFE TO EAT NOW
+    - Dal, rice, chapati with sabzi
+    - Curd, buttermilk (if fresh)
+    - Seasonal fruits (banana, apple)
+    - Peanuts, chana, murmura
+
+    2. ⚠️ AVOID / DANGER
+    - Food past expiry date
+    - Uncooked/undercooked meat
+    - Food with unusual smell/color
+    - Leftover food kept > 4 hours
+
+    3. 💧 WATER SAFETY
+    - Use filtered/boiled water
+    - Check RO/tank cleaning date
+    - Carry own water when traveling
+
+    4. 📦 PREP & STORAGE
+    - Stock 3 days dry ration
+    - Rice, dal, biscuits, peanuts
+    - Carry torch, water bottle always
+
+    5. 🆘 EMERGENCY TIP
+    - In crisis: prioritize water over food
+    - Call 112 for emergency help"""
+}
+
+
 async def stream_gemini(message: str, history: List[dict], crisis_type: str) -> AsyncGenerator[str, None]:
-    """Stream responses from Gemini API"""
+    """Stream responses from Gemini API or demo mode"""
     
-    if not GEMINI_API_KEY:
-        yield f"data: {json.dumps({'error': 'API key missing. Please set GEMINI_API_KEY in .env file'})}\n\n"
+    # Use demo mode if no API key or key is placeholder
+    if not GEMINI_API_KEY or GEMINI_API_KEY in ("YOUR_API_KEY_HERE", "demo_mode", ""):
+        # Demo mode - use canned responses
+        demo_key = crisis_type if crisis_type in DEMO_RESPONSES else "general"
+        text = DEMO_RESPONSES[demo_key]
+        
+        # Simulate streaming
+        for word in text.split():
+            yield f"data: {json.dumps({'text': word + ' '})}\n\n"
+            await asyncio.sleep(0.02)
+        
+        yield f"data: {json.dumps({'done': True})}\n\n"
         return
 
     contents = []
