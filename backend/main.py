@@ -39,6 +39,24 @@ app.add_middleware(
 # Mount static files
 app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
 
+
+@app.get("/style.css")
+async def serve_css():
+    """Serve CSS file"""
+    css_path = FRONTEND_DIR / "style.css"
+    with open(css_path, "r", encoding="utf-8") as f:
+        from fastapi.responses import Response
+        return Response(content=f.read(), media_type="text/css")
+
+
+@app.get("/script.js")
+async def serve_js():
+    """Serve JavaScript file"""
+    js_path = FRONTEND_DIR / "script.js"
+    with open(js_path, "r", encoding="utf-8") as f:
+        from fastapi.responses import Response
+        return Response(content=f.read(), media_type="application/javascript")
+
 # Gemini API configuration
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_MODEL = "gemini-2.0-flash"
